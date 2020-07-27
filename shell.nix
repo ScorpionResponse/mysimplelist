@@ -46,11 +46,12 @@ stdenv.mkDerivation rec {
   shellHook = ''
     export PS1="\n\[\033[1;32m\][nix-shell:\[\033[01;34m\]\w\[\033[1;32m\]]\[\033[0m\]\[\033[36m\]`__git_ps1`\[\033[0m\]\$ "
     export LANG="en_US.UTF-8"
+    export MIX_ENV=dev
 
     # Project
     export PGDATA="$PWD/db"
-    mix local hex
-    mix archive.install hex phx_new ${phoenix_version}
+    mix local.hex
+    # mix archive.install hex phx_new ${phoenix_version}
 
     # Welcome
     figlet -w200 "${pname} v${version}"
