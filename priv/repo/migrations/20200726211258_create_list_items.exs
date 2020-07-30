@@ -5,7 +5,6 @@ defmodule Mysimplelist.Repo.Migrations.CreateListItems do
     create table(:list_items) do
       add :title, :string
       add :details, :text
-      add :uuid, :uuid
       add :list_id, references(:lists, on_delete: :nothing)
 
       timestamps()

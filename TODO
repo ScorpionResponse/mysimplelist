@@ -2,8 +2,16 @@
 TODO
 ====
 
-* Project shell
+* Clean up templates for new schema changes
+* Continue trying to get binary_ids working
+* Support I18N (https://phrase.com/blog/posts/i18n-for-phoenix-applications-with-gettext/)
+
 * Database
 * Deployment
 * Sync
 * API
+
+Reference:
+
+* https://elixirschool.com/en/lessons/basics/basics/
+* https://phrase.com/blog/posts/i18n-for-phoenix-applications-with-gettext/

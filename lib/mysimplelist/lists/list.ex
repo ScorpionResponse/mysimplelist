@@ -1,11 +1,11 @@
 defmodule Mysimplelist.Lists.List do
-  use Ecto.Schema
+  use Mysimplelist.Schema
   import Ecto.Changeset
 
   schema "lists" do
     field :name, :string
-    field :uuid, Ecto.UUID
-    field :user_id, :id
+
+    belongs_to :user, Mysimplelist.Accounts.User
 
     timestamps()
   end
@@ -13,7 +13,8 @@ defmodule Mysimplelist.Lists.List do
   @doc false
   def changeset(list, attrs) do
     list
-    |> cast(attrs, [:name, :uuid])
-    |> validate_required([:name, :uuid])
+    |> cast(attrs, [:name])
+    |> validate_required([:name])
+    |> validate_length(:name, max: 255)
   end
 end

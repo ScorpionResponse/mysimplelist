@@ -13,7 +13,7 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Uuid</th>
+      <th>User ID</th>
 
       <th></th>
     </tr>
@@ -22,7 +22,7 @@
     <%= for list <- @lists do %>
       <tr id="list-<%= list.id %>">
         <td><%= list.name %></td>
-        <td><%= list.uuid %></td>
+        <td><%= list.user_id %></td>
 
         <td>
           <span><%= live_redirect "Show", to: Routes.list_show_path(@socket, :show, list) %></span>

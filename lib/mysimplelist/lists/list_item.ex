@@ -1,12 +1,13 @@
 defmodule Mysimplelist.Lists.ListItem do
-  use Ecto.Schema
+  use Mysimplelist.Schema
   import Ecto.Changeset
 
   schema "list_items" do
-    field :details, :string
     field :title, :string
-    field :uuid, Ecto.UUID
-    field :list_id, :id
+    field :details, :string
+    field :complete, :boolean
+    field :completed_at, :utc_datetime_usec
+    field :list_id, :binary_id
 
     timestamps()
   end
@@ -14,7 +15,8 @@ defmodule Mysimplelist.Lists.ListItem do
   @doc false
   def changeset(list_item, attrs) do
     list_item
-    |> cast(attrs, [:title, :details, :uuid])
-    |> validate_required([:title, :details, :uuid])
+    |> cast(attrs, [:title, :details, :complete])
+    |> validate_required([:title])
+    |> validate_length(:title, max: 255)
   end
 end

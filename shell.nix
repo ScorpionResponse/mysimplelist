@@ -49,8 +49,9 @@ stdenv.mkDerivation rec {
     export MIX_ENV=dev
 
     # Project
+    echo ${version} > VERSION
     export PGDATA="$PWD/db"
-    mix local.hex
+    # mix local.hex
     # mix archive.install hex phx_new ${phoenix_version}
 
     # Welcome

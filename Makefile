@@ -1,5 +1,6 @@
+SERVER_PID := "$(shell cat run/server.pid)"
 
-.PHONY: none dbinit dbstart dbswitch dbstop dbstopother
+.PHONY: none dbinit dbstart dbswitch dbstop dbstopother db run
 
 none: ;
 
@@ -8,6 +9,7 @@ dbinit:
 	createuser postgres --createdb
 
 dbstart:
+	sudo mkdir /run/postgresql; sudo chown root:users /run/postgresql; sudo chmod g+w /run/postgresql
 	pg_ctl -l "${PGDATA}/server.log" start
 
 dbstopother:
@@ -18,6 +20,13 @@ dbstop:
 
 dbswitch: | dbstopother dbstart
 
-run:
+start:
 	# PORT=4040 elixir --erl "-detached" -S mix phx.server
-	mix phx.server > dev.log 2>&1 &
+	mkdir -p run
+	mix phx.server > run/dev.log 2>&1 &
+
+stop:
+	pkill -15 beam
+
+db:
+	psql -U postgres mysimplelist_dev

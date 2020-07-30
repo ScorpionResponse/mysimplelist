@@ -4,7 +4,7 @@ defmodule Mysimplelist.MixProject do
   def project do
     [
       app: :mysimplelist,
-      version: "0.1.0",
+      version: String.trim(File.read!(Path.join(__DIR__, "VERSION"))),
       elixir: "~> 1.7",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),

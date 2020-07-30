@@ -4,6 +4,9 @@ defmodule MysimplelistWeb.ListLive.Index do
   alias Mysimplelist.Lists
   alias Mysimplelist.Lists.List
 
+  # Secondary
+  alias Mysimplelist.Accounts
+
   @impl true
   def mount(_params, _session, socket) do
     {:ok, assign(socket, :lists, list_lists())}

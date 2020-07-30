@@ -4,7 +4,6 @@ defmodule Mysimplelist.Repo.Migrations.CreateLists do
   def change do
     create table(:lists) do
       add :name, :string
-      add :uuid, :uuid
       add :user_id, references(:users, on_delete: :nothing)
 
       timestamps()

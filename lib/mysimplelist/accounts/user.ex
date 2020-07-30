@@ -1,10 +1,10 @@
 defmodule Mysimplelist.Accounts.User do
-  use Ecto.Schema
+  use Mysimplelist.Schema
   import Ecto.Changeset
 
   schema "users" do
-    field :email, :string
     field :name, :string
+    field :email, :string
 
     timestamps()
   end
@@ -14,5 +14,7 @@ defmodule Mysimplelist.Accounts.User do
     user
     |> cast(attrs, [:name, :email])
     |> validate_required([:name, :email])
+    |> validate_length(:name, max: 255)
+    |> validate_length(:email, max: 255)
   end
 end
