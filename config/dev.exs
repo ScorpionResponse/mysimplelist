@@ -11,7 +11,6 @@ config :mysimplelist, Mysimplelist.Repo,
   migration_primary_key: [name: :id, type: :binary_id],
   migration_timestamps: [type: :utc_datetime_usec]
 
-
 # For development, we disable any cache and enable
 # debugging and code reloading.
 #

@@ -5,8 +5,16 @@ defmodule MysimplelistWeb.ListItemLiveTest do
 
   alias Mysimplelist.Lists
 
-  @create_attrs %{details: "some details", title: "some title", uuid: "7488a646-e31f-11e4-aace-600308960662"}
-  @update_attrs %{details: "some updated details", title: "some updated title", uuid: "7488a646-e31f-11e4-aace-600308960668"}
+  @create_attrs %{
+    details: "some details",
+    title: "some title",
+    uuid: "7488a646-e31f-11e4-aace-600308960662"
+  }
+  @update_attrs %{
+    details: "some updated details",
+    title: "some updated title",
+    uuid: "7488a646-e31f-11e4-aace-600308960668"
+  }
   @invalid_attrs %{details: nil, title: nil, uuid: nil}
 
   defp fixture(:list_item) do

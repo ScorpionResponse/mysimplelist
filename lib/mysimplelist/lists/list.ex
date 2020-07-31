@@ -10,11 +10,14 @@ defmodule Mysimplelist.Lists.List do
     timestamps()
   end
 
+  @required_fields ~w(name user_id)
+  @optional_fields ~w()
+
   @doc false
   def changeset(list, attrs) do
     list
-    |> cast(attrs, [:name])
-    |> validate_required([:name])
+    |> cast(attrs, @required_fields, @optional_fields)
+    |> validate_required(@required_fields)
     |> validate_length(:name, max: 255)
   end
 end

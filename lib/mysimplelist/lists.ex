@@ -18,7 +18,8 @@ defmodule Mysimplelist.Lists do
 
   """
   def list_lists do
-    Repo.all(List)
+    List
+    |> Repo.all()
   end
 
   @doc """
