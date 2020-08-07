@@ -14,9 +14,13 @@
   <%= textarea f, :details %>
   <%= error_tag f, :details %>
 
-  <%= label f, :uuid %>
-  <%= text_input f, :uuid %>
-  <%= error_tag f, :uuid %>
+  <%= label f, :complete %>
+  <%= checkbox f, :complete %>
+  <%= error_tag f, :complete %>
+
+  <%= label f, :list_id %>
+  <%= select f, :list_id, Enum.map(@lists, &{&1.name, &1.id}), prompt: "Choose List" %>
+  <%= error_tag f, :list_id %>
 
   <%= submit "Save", phx_disable_with: "Saving..." %>
 </form>

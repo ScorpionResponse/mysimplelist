@@ -1,6 +1,6 @@
 SERVER_PID := "$(shell cat run/server.pid)"
 
-.PHONY: none dbinit dbstart dbswitch dbstop dbstopother db run
+.PHONY: none dbinit dbstart dbswitch dbstop dbstopother db run iex
 
 none: ;
 
@@ -30,3 +30,12 @@ stop:
 
 db:
 	psql -U postgres mysimplelist_dev
+
+iex:
+	iex -S mix
+
+test:
+	MIX_ENV=test mix test
+
+tail:
+	tail -f run/dev.log

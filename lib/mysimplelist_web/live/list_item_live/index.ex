@@ -6,7 +6,10 @@ defmodule MysimplelistWeb.ListItemLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, :list_items, list_list_items())}
+    list_items = list_list_items()
+    lists = Lists.list_lists()
+
+    {:ok, assign(socket, list_items: list_items, lists: lists)}
   end
 
   @impl true

@@ -115,7 +115,9 @@ defmodule Mysimplelist.Lists do
 
   """
   def list_list_items do
-    Repo.all(ListItem)
+    ListItem
+    |> Repo.all()
+    |> Repo.preload(:list)
   end
 
   @doc """
@@ -132,7 +134,11 @@ defmodule Mysimplelist.Lists do
       ** (Ecto.NoResultsError)
 
   """
-  def get_list_item!(id), do: Repo.get!(ListItem, id)
+  def get_list_item!(id) do
+    ListItem
+    |> Repo.get!(id)
+    |> Repo.preload(:list)
+  end
 
   @doc """
   Creates a list_item.

@@ -48,6 +48,12 @@ stdenv.mkDerivation rec {
     export LANG="en_US.UTF-8"
     export MIX_ENV=dev
 
+    make() {
+      pushd /home/phile/mysimplelist
+      command make "$*"
+      popd
+    }
+
     # Project
     echo ${version} > VERSION
     export PGDATA="$PWD/db"

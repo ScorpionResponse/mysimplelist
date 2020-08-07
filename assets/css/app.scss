@@ -1,5 +1,7 @@
-/* This file is for your main application css. */
-@import "./phoenix.css";
+/* Main Application CSS */
+@import "./reset.css";
+@import "./layout.scss";
+@import "./dark-theme.scss";
 @import "../node_modules/nprogress/nprogress.css";
 
 /* LiveView specific classes for your customizations */

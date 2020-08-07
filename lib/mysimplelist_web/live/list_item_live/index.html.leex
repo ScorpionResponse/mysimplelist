@@ -6,6 +6,7 @@
     title: @page_title,
     action: @live_action,
     list_item: @list_item,
+    lists: @lists,
     return_to: Routes.list_item_index_path(@socket, :index) %>
 <% end %>
 
@@ -14,7 +15,9 @@
     <tr>
       <th>Title</th>
       <th>Details</th>
-      <th>Uuid</th>
+      <th>Completed</th>
+      <th>Completed At</th>
+      <th>List</th>
 
       <th></th>
     </tr>
@@ -24,7 +27,11 @@
       <tr id="list_item-<%= list_item.id %>">
         <td><%= list_item.title %></td>
         <td><%= list_item.details %></td>
-        <td><%= list_item.uuid %></td>
+        <td><%= list_item.complete %></td>
+        <td><%= list_item.completed_at %></td>
+        <td><%= live_redirect to: Routes.list_show_path(@socket, :show, list_item.list) do %>
+          <%= list_item.list.name %>
+        <% end %></td>
 
         <td>
           <span><%= live_redirect "Show", to: Routes.list_item_show_path(@socket, :show, list_item) %></span>

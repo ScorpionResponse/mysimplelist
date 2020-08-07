@@ -9,13 +9,13 @@ defmodule Mysimplelist.Accounts.User do
     timestamps()
   end
 
-  @required_fields ~w(name email)
-  @optional_fields ~w()
+  @required_fields ~w(name email)a
+  @optional_fields ~w()a
 
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, @required_fields, @optional_fields)
+    |> cast(attrs, @required_fields ++ @optional_fields)
     |> validate_required(@required_fields)
     |> validate_length(:name, max: 255)
     |> validate_length(:email, max: 255)
