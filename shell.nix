@@ -3,7 +3,7 @@
 with (import nixpkgs { inherit system; });
 
 let
-  version = "0.0.1";
+  version = "0.0.2";
   pname = "mysimplelist-dev";
 
   erlang = erlangR22;
@@ -44,7 +44,7 @@ stdenv.mkDerivation rec {
   '';
 
   shellHook = ''
-    export PS1="\n\[\033[1;32m\][nix-shell:\[\033[01;34m\]\w\[\033[1;32m\]]\[\033[0m\]\[\033[36m\]`__git_ps1`\[\033[0m\]\$ "
+    export PS1='\n\[\033[1;32m\][nix-shell:\[\033[01;34m\]\w\[\033[1;32m\]]\[\033[0m\]\[\033[36m\]`__git_ps1`\[\033[0m\]\$ '
     export LANG="en_US.UTF-8"
     export MIX_ENV=dev
 

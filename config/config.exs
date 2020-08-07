@@ -1,14 +1,11 @@
-# This file is responsible for configuring your application
-# and its dependencies with the aid of the Mix.Config module.
-#
-# This configuration file is loaded before any dependency and
-# is restricted to this project.
-
 # General application configuration
 use Mix.Config
 
 config :mysimplelist,
   ecto_repos: [Mysimplelist.Repo]
+
+config :mysimplelist, Mysimplelist.Repo,
+  log: false
 
 # Configures the endpoint
 config :mysimplelist, MysimplelistWeb.Endpoint,
@@ -19,9 +16,8 @@ config :mysimplelist, MysimplelistWeb.Endpoint,
   live_view: [signing_salt: "3RVnGUuGo5cQYHuSGOVr6OEeGDcI+2GN5muMtKAcmwypjRyjDrWGQdIRXmrdalaP"]
 
 # Configures Elixir's Logger
-config :logger, :console,
-  format: "$time $metadata[$level] $message\n",
-  metadata: [:request_id]
+config :logger_json, :backend, metadata: :all
+config :logger, backends: [LoggerJSON]
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason

@@ -20,7 +20,7 @@ defmodule Mysimplelist.MixProject do
   def application do
     [
       mod: {Mysimplelist.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:jason, :logger_json, :runtime_tools]
     ]
   end
 
@@ -29,8 +29,6 @@ defmodule Mysimplelist.MixProject do
   defp elixirc_paths(_), do: ["lib"]
 
   # Specifies your project dependencies.
-  #
-  # Type `mix help deps` for examples and options.
   defp deps do
     [
       {:phoenix, "~> 1.5.4"},
@@ -46,7 +44,8 @@ defmodule Mysimplelist.MixProject do
       {:telemetry_poller, "~> 0.4"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"}
+      {:plug_cowboy, "~> 2.0"},
+      {:logger_json, "~> 4.0"}
     ]
   end
 

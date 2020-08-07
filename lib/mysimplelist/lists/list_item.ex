@@ -26,7 +26,6 @@ defmodule Mysimplelist.Lists.ListItem do
     |> handle_completed_at
   end
 
-  @doc "Set the completed_at field if the complete checkbox is checked"
   defp handle_completed_at(changeset) do
     complete = get_change(changeset, :complete)
     changeset
