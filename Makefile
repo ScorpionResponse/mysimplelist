@@ -28,6 +28,11 @@ start:
 stop:
 	pkill -15 beam
 
+sleep:
+	sleep 2
+
+restart: stop sleep start
+
 db:
 	psql -U postgres mysimplelist_dev
 

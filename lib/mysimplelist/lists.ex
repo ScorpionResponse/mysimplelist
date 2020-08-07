@@ -1,10 +1,10 @@
 defmodule Mysimplelist.Lists do
   @moduledoc """
-  The Lists context.
+  Interact with Lists, which contain ListItems.
   """
 
   import Ecto.Query, warn: false
-  alias Mysimplelist.Repo
+  alias Mysimplelist.{Logger, Repo}
 
   alias Mysimplelist.Lists.List
 
@@ -53,6 +53,7 @@ defmodule Mysimplelist.Lists do
   def create_list(attrs \\ %{}) do
     %List{}
     |> List.changeset(attrs)
+    |> Logger.log(:ListCreate)
     |> Repo.insert()
   end
 
@@ -71,6 +72,7 @@ defmodule Mysimplelist.Lists do
   def update_list(%List{} = list, attrs) do
     list
     |> List.changeset(attrs)
+    |> Logger.log(:ListUpdate)
     |> Repo.update()
   end
 
@@ -87,7 +89,9 @@ defmodule Mysimplelist.Lists do
 
   """
   def delete_list(%List{} = list) do
-    Repo.delete(list)
+    list
+    |> Logger.log(:ListDelete)
+    |> Repo.delete()
   end
 
   @doc """
@@ -155,6 +159,7 @@ defmodule Mysimplelist.Lists do
   def create_list_item(attrs \\ %{}) do
     %ListItem{}
     |> ListItem.changeset(attrs)
+    |> Logger.log(:ListItemCreate)
     |> Repo.insert()
   end
 
@@ -173,6 +178,7 @@ defmodule Mysimplelist.Lists do
   def update_list_item(%ListItem{} = list_item, attrs) do
     list_item
     |> ListItem.changeset(attrs)
+    |> Logger.log(:ListItemUpdate)
     |> Repo.update()
   end
 
@@ -189,7 +195,9 @@ defmodule Mysimplelist.Lists do
 
   """
   def delete_list_item(%ListItem{} = list_item) do
-    Repo.delete(list_item)
+    list_item
+    |> Logger.log(:ListItemDelete)
+    |> Repo.delete()
   end
 
   @doc """

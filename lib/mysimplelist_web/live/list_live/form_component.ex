@@ -23,6 +23,7 @@ defmodule MysimplelistWeb.ListLive.FormComponent do
     {:noreply, assign(socket, :changeset, changeset)}
   end
 
+  @doc "Handle the save event"
   def handle_event("save", %{"list" => list_params}, socket) do
     save_list(socket, socket.assigns.action, list_params)
   end
