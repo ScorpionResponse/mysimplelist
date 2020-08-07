@@ -1,6 +1,5 @@
 defmodule Mysimplelist.Lists.ListItem do
   @moduledoc "A simple item in a list that can be completed"
-  require Logger
   use Mysimplelist.Schema
   import Ecto.Changeset
 
