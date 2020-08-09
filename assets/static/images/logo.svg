@@ -1,0 +1,55 @@
+<svg width="529" height="329" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <filter height="200%" width="200%" y="-50%" x="-50%" id="diagonal_line_blur">
+   <feGaussianBlur stdDeviation="2" in="SourceGraphic"/>
+  </filter>
+  <filter height="200%" width="200%" y="-50%" x="-50%" id="text_blur">
+   <feGaussianBlur stdDeviation="1" in="SourceGraphic"/>
+  </filter>
+ </defs>
+ <g>
+  <title>Background Layer</title>
+  <rect fill="#fff" id="canvas_background" width="531" height="331" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Lines Layer</title>
+  <line id="diagonal_line_1" filter="url(#diagonal_line_blur)" y2="0" x2="22" y1="22" x1="0" stroke-width="5" stroke="#8bb933"/>
+  <line id="diagonal_line_2" filter="url(#diagonal_line_blur)" y2="0" x2="54" y1="54" x1="0" stroke-width="5" stroke="#8bb933"/>
+  <line id="diagonal_line_3" filter="url(#diagonal_line_blur)" y2="0" x2="86" y1="86" x1="0" stroke-width="5" stroke="#8bb933"/>
+  <line id="diagonal_line_4" filter="url(#diagonal_line_blur)" y2="0" x2="118" y1="118" x1="0" stroke-width="5" stroke="#8bb933"/>
+  <line id="diagonal_line_5" filter="url(#diagonal_line_blur)" y2="0" x2="150" y1="150" x1="0" stroke-width="5" stroke="#8bb933"/>
+  <line id="diagonal_line_6" filter="url(#diagonal_line_blur)" y2="0" x2="182" y1="182" x1="0" stroke-width="5" stroke="#8bb933"/>
+  <line id="diagonal_line_7" filter="url(#diagonal_line_blur)" y2="0" x2="214" y1="214" x1="0" stroke-width="5" stroke="#8bb933"/>
+  <line id="diagonal_line_8" filter="url(#diagonal_line_blur)" y2="0" x2="246" y1="246" x1="0" stroke-width="5" stroke="#8bb933"/>
+  <line id="diagonal_line_9" filter="url(#diagonal_line_blur)" y2="0" x2="278" y1="278" x1="0" stroke-width="5" stroke="#8bb933"/>
+  <line id="diagonal_line_10" filter="url(#diagonal_line_blur)" y2="0" x2="310" y1="310" x1="0" stroke-width="5" stroke="#8bb933"/>
+  <line id="diagonal_line_11" filter="url(#diagonal_line_blur)" y2="0" x2="342" y1="342" x1="0" stroke-width="5" stroke="#8bb933"/>
+  <line id="diagonal_line_12" filter="url(#diagonal_line_blur)" y2="0" x2="374" y1="374" x1="0" stroke-width="5" stroke="#8bb933"/>
+  <line id="diagonal_line_13" filter="url(#diagonal_line_blur)" y2="0" x2="406" y1="406" x1="0" stroke-width="5" stroke="#8bb933"/>
+  <line id="diagonal_line_14" filter="url(#diagonal_line_blur)" y2="0" x2="438" y1="438" x1="0" stroke-width="5" stroke="#8bb933"/>
+  <line id="diagonal_line_15" filter="url(#diagonal_line_blur)" y2="0" x2="470" y1="470" x1="0" stroke-width="5" stroke="#8bb933"/>
+  <line id="diagonal_line_16" filter="url(#diagonal_line_blur)" y2="0" x2="502" y1="502" x1="0" stroke-width="5" stroke="#8bb933"/>
+  <line id="diagonal_line_17" filter="url(#diagonal_line_blur)" y2="0" x2="534" y1="534" x1="0" stroke-width="5" stroke="#8bb933"/>
+  <line id="diagonal_line_18" filter="url(#diagonal_line_blur)" y2="0" x2="566" y1="566" x1="0" stroke-width="5" stroke="#8bb933"/>
+  <line id="diagonal_line_19" filter="url(#diagonal_line_blur)" y2="0" x2="598" y1="598" x1="0" stroke-width="5" stroke="#8bb933"/>
+  <line id="diagonal_line_20" filter="url(#diagonal_line_blur)" y2="0" x2="630" y1="630" x1="0" stroke-width="5" stroke="#8bb933"/>
+  <line id="diagonal_line_21" filter="url(#diagonal_line_blur)" y2="0" x2="662" y1="662" x1="0" stroke-width="5" stroke="#8bb933"/>
+  <line id="diagonal_line_22" filter="url(#diagonal_line_blur)" y2="0" x2="694" y1="694" x1="0" stroke-width="5" stroke="#8bb933"/>
+  <line id="diagonal_line_23" filter="url(#diagonal_line_blur)" y2="0" x2="726" y1="726" x1="0" stroke-width="5" stroke="#8bb933"/>
+  <line id="diagonal_line_24" filter="url(#diagonal_line_blur)" y2="0" x2="758" y1="758" x1="0" stroke-width="5" stroke="#8bb933"/>
+  <line id="diagonal_line_25" filter="url(#diagonal_line_blur)" y2="0" x2="790" y1="790" x1="0" stroke-width="5" stroke="#8bb933"/>
+ </g>
+ <g>
+  <title>M Layer</title>
+  <rect id="rect_left" height="329" width="142" y="0" x="0" stroke-width="1" stroke="#fff" fill="#fff"/>
+  <rect id="rect_top" height="329" width="136" y="0" x="393" stroke-width="1" stroke="#fff" fill="#fff"/>
+  <rect id="rect_bottom" height="78" width="529" y="251" x="0" stroke-width="1" stroke="#fff" fill="#fff"/>
+  <polygon id="triangle_top" points="184,0 268,84 351,0" stroke-width="1" stroke="#fff" fill="#fff"/>
+  <polygon id="triangle_left_bottom" points="191,252 191,77 268,153 268,252" stroke-width="1" stroke="#fff" fill="#fff"/>
+  <polygon id="triangle_right_bottom" points="345,252 345,77 268,153 268,252" stroke-width="1" stroke="#fff" fill="#fff"/>
+ </g>
+ <g>
+  <title>MySimpleList Layer</title>
+  <text id="logo_title" filter="url(#text_blur)" y="309" x="10" font-size="77" font-family="Consolas" stroke-width="0" stroke="#fff" fill="#8bb933">MySimpleList</text>
+ </g>
+</svg>
