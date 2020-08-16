@@ -5,8 +5,8 @@ defmodule MysimplelistWeb.ListLive.Index do
   alias Mysimplelist.Lists.List
 
   @impl true
-  def mount(_params, _session, socket) do
-    {:ok, assign(socket, :lists, list_lists())}
+  def mount(_params, %{"current_user_token" => current_user_token}, socket) do
+    {:ok, assign(socket, lists: list_lists(), current_user_token: current_user_token)}
   end
 
   @impl true

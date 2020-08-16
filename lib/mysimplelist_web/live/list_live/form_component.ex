@@ -2,6 +2,8 @@ defmodule MysimplelistWeb.ListLive.FormComponent do
   use MysimplelistWeb, :live_component
 
   alias Mysimplelist.Lists
+  alias Mysimplelist.Logger
+  alias MysimplelistWeb.Session
 
   @impl true
   def update(%{list: list} = assigns, socket) do
@@ -13,11 +15,14 @@ defmodule MysimplelistWeb.ListLive.FormComponent do
      |> assign(:changeset, changeset)}
   end
 
+  @doc "Handle validation of the list"
   @impl true
   def handle_event("validate", %{"list" => list_params}, socket) do
+    effective_params = Session.replace_token_with_user_in(list_params)
+
     changeset =
       socket.assigns.list
-      |> Lists.change_list(list_params)
+      |> Lists.change_list(effective_params)
       |> Map.put(:action, :validate)
 
     {:noreply, assign(socket, :changeset, changeset)}
@@ -25,7 +30,8 @@ defmodule MysimplelistWeb.ListLive.FormComponent do
 
   @doc "Handle the save event"
   def handle_event("save", %{"list" => list_params}, socket) do
-    save_list(socket, socket.assigns.action, list_params)
+    effective_params = Session.replace_token_with_user_in(list_params)
+    save_list(socket, socket.assigns.action, effective_params)
   end
 
   defp save_list(socket, :edit, list_params) do
