@@ -17,6 +17,9 @@ defmodule MysimplelistWeb.ConnCase do
 
   use ExUnit.CaseTemplate
 
+  alias Mysimplelist.Accounts
+  alias MysimplelistWeb.Session
+
   using do
     quote do
       # Import conveniences for testing with connections
@@ -31,6 +34,16 @@ defmodule MysimplelistWeb.ConnCase do
     end
   end
 
+  @test_user_attrs %{email: "test@example.com", name: "Test Name"}
+
+  defp with_session(conn) do
+    {:ok, user} = Accounts.create_user(@test_user_attrs)
+    test_user_token = Session.tokenize_user(user)
+
+    conn
+    |> Plug.Test.init_test_session(current_user_token: test_user_token)
+  end
+
   setup tags do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Mysimplelist.Repo)
 
@@ -38,6 +51,10 @@ defmodule MysimplelistWeb.ConnCase do
       Ecto.Adapters.SQL.Sandbox.mode(Mysimplelist.Repo, {:shared, self()})
     end
 
-    {:ok, conn: Phoenix.ConnTest.build_conn()}
+    conn = Phoenix.ConnTest.build_conn()
+
+    if tags[:with_session], do: with_session(conn)
+
+    {:ok, conn: conn}
   end
 end

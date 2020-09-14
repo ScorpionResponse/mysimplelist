@@ -5,8 +5,8 @@ defmodule MysimplelistWeb.UserLiveTest do
 
   alias Mysimplelist.Accounts
 
-  @create_attrs %{email: "some email", name: "some name"}
-  @update_attrs %{email: "some updated email", name: "some updated name"}
+  @create_attrs %{email: "some@valid.email", name: "some name"}
+  @update_attrs %{email: "some@updated.email", name: "some updated name"}
   @invalid_attrs %{email: nil, name: nil}
 
   defp fixture(:user) do
@@ -48,7 +48,7 @@ defmodule MysimplelistWeb.UserLiveTest do
         |> follow_redirect(conn, Routes.user_index_path(conn, :index))
 
       assert html =~ "User created successfully"
-      assert html =~ "some email"
+      assert html =~ "some@valid.email"
     end
 
     test "updates user in listing", %{conn: conn, user: user} do
@@ -70,7 +70,7 @@ defmodule MysimplelistWeb.UserLiveTest do
         |> follow_redirect(conn, Routes.user_index_path(conn, :index))
 
       assert html =~ "User updated successfully"
-      assert html =~ "some updated email"
+      assert html =~ "some@updated.email"
     end
 
     test "deletes user in listing", %{conn: conn, user: user} do
@@ -110,7 +110,7 @@ defmodule MysimplelistWeb.UserLiveTest do
         |> follow_redirect(conn, Routes.user_show_path(conn, :show, user))
 
       assert html =~ "User updated successfully"
-      assert html =~ "some updated email"
+      assert html =~ "some@updated.email"
     end
   end
 end

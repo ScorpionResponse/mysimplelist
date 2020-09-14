@@ -2,6 +2,10 @@ defmodule MysimplelistWeb.Session do
   alias Mysimplelist.Accounts
   alias Mysimplelist.Accounts.User
 
+  def tokenize_user(nil) do
+    nil
+  end
+
   def tokenize_user(%User{} = user) do
     tokenize_user(user.id)
   end
@@ -28,6 +32,13 @@ defmodule MysimplelistWeb.Session do
       {:error, _} ->
         raise MysimplelistWeb.AuthenticationError, message: "Unknown user"
     end
+  end
+
+  def separate_user_info(obj, current_key \\ "current_user_token") do
+    {token, obj_rest} = Map.get_and_update(obj, current_key, fn _ -> :pop end)
+    user = user_from_token!(token)
+
+    {user, obj_rest}
   end
 
   def replace_token_with_user_in(obj, current_key \\ "current_user_token", replace_key \\ "user") do

@@ -1,6 +1,6 @@
 SERVER_PID := "$(shell cat run/server.pid)"
 
-.PHONY: none dbinit dbstart dbswitch dbstop dbstopother db run iex
+.PHONY: none dbinit dbstart dbswitch dbstop dbstopother db run iex test tail start stop sleep restart
 
 none: ;
 

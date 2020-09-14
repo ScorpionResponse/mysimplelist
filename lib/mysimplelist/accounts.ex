@@ -4,7 +4,7 @@ defmodule Mysimplelist.Accounts do
   """
 
   import Ecto.Query, warn: false
-  alias Mysimplelist.Repo
+  alias Mysimplelist.{Logger, Repo}
 
   alias Mysimplelist.Accounts.User
 
@@ -18,8 +18,23 @@ defmodule Mysimplelist.Accounts do
 
   """
   def list_users do
-    Repo.all(User)
+    User
+    |> Repo.all()
   end
+
+  @doc """
+  Gets the first user.
+
+  ## Examples
+
+      iex> get_first_user()
+      %User{}
+
+      iex> get_first_user()
+      nil
+
+  """
+  def get_first_user(), do: Repo.one(first(User))
 
   @doc """
   Gets a single user.
@@ -38,6 +53,20 @@ defmodule Mysimplelist.Accounts do
   def get_user!(id), do: Repo.get!(User, id)
 
   @doc """
+  Gets a single user or nil.
+
+  ## Examples
+
+      iex> get_user(123)
+      %User{}
+
+      iex> get_user(456)
+      nil
+
+  """
+  def get_user(id), do: Repo.get(User, id)
+
+  @doc """
   Creates a user.
 
   ## Examples
@@ -52,6 +81,7 @@ defmodule Mysimplelist.Accounts do
   def create_user(attrs \\ %{}) do
     %User{}
     |> User.changeset(attrs)
+    |> Logger.log(:User_Create)
     |> Repo.insert()
   end
 
@@ -70,6 +100,7 @@ defmodule Mysimplelist.Accounts do
   def update_user(%User{} = user, attrs) do
     user
     |> User.changeset(attrs)
+    |> Logger.log(:User_Update)
     |> Repo.update()
   end
 
@@ -86,7 +117,9 @@ defmodule Mysimplelist.Accounts do
 
   """
   def delete_user(%User{} = user) do
-    Repo.delete(user)
+    user
+    |> Logger.log(:User_Delete)
+    |> Repo.delete()
   end
 
   @doc """

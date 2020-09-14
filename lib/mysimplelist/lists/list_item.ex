@@ -14,8 +14,8 @@ defmodule Mysimplelist.Lists.ListItem do
     timestamps()
   end
 
-  @required_fields ~w(title list_id)a
-  @optional_fields ~w(details complete)a
+  @required_fields ~w(title)a
+  @optional_fields ~w(details complete list_id)a
 
   @doc false
   def changeset(list_item, attrs) do
@@ -28,7 +28,8 @@ defmodule Mysimplelist.Lists.ListItem do
 
   defp handle_completed_at(changeset) do
     complete = get_change(changeset, :complete)
+
     changeset
-    |> put_change(:completed_at, (if complete, do: DateTime.utc_now, else: nil))
+    |> put_change(:completed_at, if(complete, do: DateTime.utc_now(), else: nil))
   end
 end

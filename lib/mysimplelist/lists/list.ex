@@ -2,6 +2,8 @@ defmodule Mysimplelist.Lists.List do
   use Mysimplelist.Schema
   import Ecto.Changeset
 
+  alias Mysimplelist.{Logger, Repo}
+
   schema "lists" do
     field(:name, :string)
 
@@ -17,15 +19,23 @@ defmodule Mysimplelist.Lists.List do
   def changeset(list, attrs) do
     list
     |> cast(attrs, @required_fields ++ @optional_fields)
-    |> put_user_if_present(attrs)
     |> validate_required(@required_fields)
     |> validate_length(:name, max: 255)
   end
 
   defp put_user_if_present(list, attrs) do
+    Logger.log(attrs, :PutUserIfPresent, :warn)
+    Logger.log(list, :PutUserIfPresent2, :warn)
+
     case attrs do
       %{"user" => user} ->
-        put_assoc(list, :user, user, required: true)
+        cond do
+          user.id != get_field(list, :user).id ->
+            put_assoc(list, :user, user, required: true)
+
+          user.id == get_field(list, :user).id ->
+            list
+        end
 
       _ ->
         list

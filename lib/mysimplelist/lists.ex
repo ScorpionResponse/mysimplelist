@@ -20,6 +20,7 @@ defmodule Mysimplelist.Lists do
   def list_lists do
     List
     |> Repo.all()
+    |> Repo.preload(:user)
   end
 
   @doc """
@@ -36,24 +37,28 @@ defmodule Mysimplelist.Lists do
       ** (Ecto.NoResultsError)
 
   """
-  def get_list!(id), do: Repo.get!(List, id)
+  def get_list!(id) do
+    Repo.get!(List, id)
+    |> Repo.preload(:user)
+  end
 
   @doc """
   Creates a list.
 
   ## Examples
 
-      iex> create_list(%{field: value})
+      iex> create_list(%User{}, %{field: value})
       {:ok, %List{}}
 
-      iex> create_list(%{field: bad_value})
+      iex> create_list(%User{}, %{field: bad_value})
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_list(attrs \\ %{}) do
+  def create_list(user, attrs \\ %{}) do
     %List{}
     |> List.changeset(attrs)
-    |> Logger.log(:ListCreate)
+    |> Ecto.Changeset.put_assoc(:user, user, required: true)
+    |> Logger.log(:List_Create)
     |> Repo.insert()
   end
 
@@ -72,7 +77,7 @@ defmodule Mysimplelist.Lists do
   def update_list(%List{} = list, attrs) do
     list
     |> List.changeset(attrs)
-    |> Logger.log(:ListUpdate)
+    |> Logger.log(:List_Update)
     |> Repo.update()
   end
 
@@ -90,7 +95,7 @@ defmodule Mysimplelist.Lists do
   """
   def delete_list(%List{} = list) do
     list
-    |> Logger.log(:ListDelete)
+    |> Logger.log(:List_Delete)
     |> Repo.delete()
   end
 
@@ -159,7 +164,7 @@ defmodule Mysimplelist.Lists do
   def create_list_item(attrs \\ %{}) do
     %ListItem{}
     |> ListItem.changeset(attrs)
-    |> Logger.log(:ListItemCreate)
+    |> Logger.log(:ListItem_Create)
     |> Repo.insert()
   end
 
@@ -178,7 +183,7 @@ defmodule Mysimplelist.Lists do
   def update_list_item(%ListItem{} = list_item, attrs) do
     list_item
     |> ListItem.changeset(attrs)
-    |> Logger.log(:ListItemUpdate)
+    |> Logger.log(:ListItem_Update)
     |> Repo.update()
   end
 
@@ -196,7 +201,7 @@ defmodule Mysimplelist.Lists do
   """
   def delete_list_item(%ListItem{} = list_item) do
     list_item
-    |> Logger.log(:ListItemDelete)
+    |> Logger.log(:ListItem_Delete)
     |> Repo.delete()
   end
 

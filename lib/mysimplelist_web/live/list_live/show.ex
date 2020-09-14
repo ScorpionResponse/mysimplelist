@@ -4,8 +4,8 @@ defmodule MysimplelistWeb.ListLive.Show do
   alias Mysimplelist.Lists
 
   @impl true
-  def mount(_params, _session, socket) do
-    {:ok, socket}
+  def mount(_params, %{"current_user_token" => current_user_token}, socket) do
+    {:ok, assign(socket, current_user_token: current_user_token)}
   end
 
   @impl true

@@ -2,28 +2,22 @@ defmodule MysimplelistWeb.ListItemLiveTest do
   use MysimplelistWeb.ConnCase
 
   import Phoenix.LiveViewTest
-
-  alias Mysimplelist.Lists
+  import Mysimplelist.Tests.Fixtures
 
   @create_attrs %{
-    details: "some details",
     title: "some title",
-    uuid: "7488a646-e31f-11e4-aace-600308960662"
+    details: "some details",
+    complete: false
   }
   @update_attrs %{
-    details: "some updated details",
     title: "some updated title",
-    uuid: "7488a646-e31f-11e4-aace-600308960668"
+    details: "some updated details",
+    complete: true
   }
-  @invalid_attrs %{details: nil, title: nil, uuid: nil}
-
-  defp fixture(:list_item) do
-    {:ok, list_item} = Lists.create_list_item(@create_attrs)
-    list_item
-  end
+  @invalid_attrs %{title: nil}
 
   defp create_list_item(_) do
-    list_item = fixture(:list_item)
+    list_item = list_item_fixture()
     %{list_item: list_item}
   end
 

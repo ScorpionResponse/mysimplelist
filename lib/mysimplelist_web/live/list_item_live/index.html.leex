@@ -30,9 +30,13 @@
         <td><%= list_item.details %></td>
         <td><%= list_item.complete %></td>
         <td><%= list_item.completed_at %></td>
-        <td><%= live_redirect to: Routes.list_show_path(@socket, :show, list_item.list) do %>
-          <%= list_item.list.name %>
-        <% end %></td>
+        <td>
+          <%= if list_item.list do %>
+            <%= live_redirect to: Routes.list_show_path(@socket, :show, list_item.list) do %>
+              <%= list_item.list.name %>
+            <% end %>
+          <% end %>
+        </td>
 
         <td>
           <span><%= live_redirect "Show", to: Routes.list_item_show_path(@socket, :show, list_item) %></span>

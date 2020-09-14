@@ -2,22 +2,14 @@ defmodule Mysimplelist.ListsTest do
   use Mysimplelist.DataCase
 
   alias Mysimplelist.Lists
+  import Mysimplelist.Tests.Fixtures
 
   describe "lists" do
     alias Mysimplelist.Lists.List
 
-    @valid_attrs %{name: "some name", uuid: "7488a646-e31f-11e4-aace-600308960662"}
-    @update_attrs %{name: "some updated name", uuid: "7488a646-e31f-11e4-aace-600308960668"}
-    @invalid_attrs %{name: nil, uuid: nil}
-
-    def list_fixture(attrs \\ %{}) do
-      {:ok, list} =
-        attrs
-        |> Enum.into(@valid_attrs)
-        |> Lists.create_list()
-
-      list
-    end
+    @valid_attrs %{name: "some name"}
+    @update_attrs %{name: "some updated name"}
+    @invalid_attrs %{name: nil, user_id: nil}
 
     test "list_lists/0 returns all lists" do
       list = list_fixture()
@@ -30,20 +22,22 @@ defmodule Mysimplelist.ListsTest do
     end
 
     test "create_list/1 with valid data creates a list" do
-      assert {:ok, %List{} = list} = Lists.create_list(@valid_attrs)
+      user = user_fixture()
+      assert {:ok, %List{} = list} = Lists.create_list(user, @valid_attrs)
       assert list.name == "some name"
-      assert list.uuid == "7488a646-e31f-11e4-aace-600308960662"
+      assert list.user_id == user.id
     end
 
     test "create_list/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Lists.create_list(@invalid_attrs)
+      assert {:error, %Ecto.Changeset{}} = Lists.create_list(nil, @invalid_attrs)
     end
 
     test "update_list/2 with valid data updates the list" do
-      list = list_fixture()
+      user = user_fixture()
+      list = list_fixture(%{user: user})
       assert {:ok, %List{} = list} = Lists.update_list(list, @update_attrs)
       assert list.name == "some updated name"
-      assert list.uuid == "7488a646-e31f-11e4-aace-600308960668"
+      assert list.user_id == user.id
     end
 
     test "update_list/2 with invalid data returns error changeset" do
@@ -68,41 +62,37 @@ defmodule Mysimplelist.ListsTest do
     alias Mysimplelist.Lists.ListItem
 
     @valid_attrs %{
-      details: "some details",
       title: "some title",
-      uuid: "7488a646-e31f-11e4-aace-600308960662"
+      details: "some details",
+      complete: false
     }
     @update_attrs %{
-      details: "some updated details",
       title: "some updated title",
-      uuid: "7488a646-e31f-11e4-aace-600308960668"
+      details: "some updated details",
+      complete: false
     }
-    @invalid_attrs %{details: nil, title: nil, uuid: nil}
-
-    def list_item_fixture(attrs \\ %{}) do
-      {:ok, list_item} =
-        attrs
-        |> Enum.into(@valid_attrs)
-        |> Lists.create_list_item()
-
-      list_item
-    end
+    @invalid_attrs %{title: nil, details: nil, complete: nil}
 
     test "list_list_items/0 returns all list_items" do
       list_item = list_item_fixture()
-      assert Lists.list_list_items() == [list_item]
+      assert Map.delete(List.last(Lists.list_list_items()), :list) == Map.delete(list_item, :list)
     end
 
     test "get_list_item!/1 returns the list_item with given id" do
       list_item = list_item_fixture()
-      assert Lists.get_list_item!(list_item.id) == list_item
+      assert Map.delete(Lists.get_list_item!(list_item.id), :list) == Map.delete(list_item, :list)
     end
 
     test "create_list_item/1 with valid data creates a list_item" do
-      assert {:ok, %ListItem{} = list_item} = Lists.create_list_item(@valid_attrs)
+      list = list_fixture()
+
+      assert {:ok, %ListItem{} = list_item} =
+               Lists.create_list_item(Map.put(@valid_attrs, :list_id, list.id))
+
       assert list_item.details == "some details"
       assert list_item.title == "some title"
-      assert list_item.uuid == "7488a646-e31f-11e4-aace-600308960662"
+      assert list_item.complete == false
+      assert list_item.list_id == list.id
     end
 
     test "create_list_item/1 with invalid data returns error changeset" do
@@ -110,17 +100,20 @@ defmodule Mysimplelist.ListsTest do
     end
 
     test "update_list_item/2 with valid data updates the list_item" do
-      list_item = list_item_fixture()
+      list = list_fixture()
+      list_item = list_item_fixture(%{list: list})
+
       assert {:ok, %ListItem{} = list_item} = Lists.update_list_item(list_item, @update_attrs)
+
       assert list_item.details == "some updated details"
       assert list_item.title == "some updated title"
-      assert list_item.uuid == "7488a646-e31f-11e4-aace-600308960668"
+      assert list_item.list_id == list.id
     end
 
     test "update_list_item/2 with invalid data returns error changeset" do
       list_item = list_item_fixture()
       assert {:error, %Ecto.Changeset{}} = Lists.update_list_item(list_item, @invalid_attrs)
-      assert list_item == Lists.get_list_item!(list_item.id)
+      assert Map.delete(list_item, :list) == Map.delete(Lists.get_list_item!(list_item.id), :list)
     end
 
     test "delete_list_item/1 deletes the list_item" do

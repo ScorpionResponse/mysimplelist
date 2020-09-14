@@ -1,21 +1,15 @@
 defmodule MysimplelistWeb.ListLiveTest do
-  use MysimplelistWeb.ConnCase
+  use MysimplelistWeb.ConnCase, with_session: true
 
   import Phoenix.LiveViewTest
+  import Mysimplelist.Tests.Fixtures
 
-  alias Mysimplelist.Lists
-
-  @create_attrs %{name: "some name", uuid: "7488a646-e31f-11e4-aace-600308960662"}
-  @update_attrs %{name: "some updated name", uuid: "7488a646-e31f-11e4-aace-600308960668"}
-  @invalid_attrs %{name: nil, uuid: nil}
-
-  defp fixture(:list) do
-    {:ok, list} = Lists.create_list(@create_attrs)
-    list
-  end
+  @create_attrs %{name: "some name"}
+  @update_attrs %{name: "some updated name"}
+  @invalid_attrs %{name: nil}
 
   defp create_list(_) do
-    list = fixture(:list)
+    list = list_fixture()
     %{list: list}
   end
 

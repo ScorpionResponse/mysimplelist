@@ -14,7 +14,9 @@ database_url =
 config :mysimplelist, Mysimplelist.Repo,
   # ssl: true,
   url: database_url,
-  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
+  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
+  migration_primary_key: [name: :id, type: :binary_id],
+  migration_timestamps: [type: :utc_datetime_usec]
 
 secret_key_base =
   System.get_env("SECRET_KEY_BASE") ||

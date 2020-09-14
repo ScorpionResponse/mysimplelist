@@ -7,6 +7,7 @@
     action: @live_action,
     list_item: @list_item,
     lists: @lists,
+    current_user_token: @current_user_token,
     return_to: Routes.list_item_show_path(@socket, :show, @list_item) %>
 <% end %>
 
@@ -34,8 +35,10 @@
 
   <li>
     <strong>List:</strong>
-    <%= live_redirect to: Routes.list_show_path(@socket, :show, @list_item.list) do %>
-      <%= @list_item.list.name %> (<%= @list_item.list_id %>)
+    <%= if @list_item.list do %>
+      <%= live_redirect to: Routes.list_show_path(@socket, :show, @list_item.list) do %>
+        <%= @list_item.list.name %> (<%= @list_item.list_id %>)
+      <% end %>
     <% end %>
   </li>
 

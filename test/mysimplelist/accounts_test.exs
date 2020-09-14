@@ -6,8 +6,8 @@ defmodule Mysimplelist.AccountsTest do
   describe "users" do
     alias Mysimplelist.Accounts.User
 
-    @valid_attrs %{email: "some email", name: "some name"}
-    @update_attrs %{email: "some updated email", name: "some updated name"}
+    @valid_attrs %{email: "some@valid.email", name: "some name"}
+    @update_attrs %{email: "some@updated.email", name: "some updated name"}
     @invalid_attrs %{email: nil, name: nil}
 
     def user_fixture(attrs \\ %{}) do
@@ -31,7 +31,7 @@ defmodule Mysimplelist.AccountsTest do
 
     test "create_user/1 with valid data creates a user" do
       assert {:ok, %User{} = user} = Accounts.create_user(@valid_attrs)
-      assert user.email == "some email"
+      assert user.email == "some@valid.email"
       assert user.name == "some name"
     end
 
@@ -42,7 +42,7 @@ defmodule Mysimplelist.AccountsTest do
     test "update_user/2 with valid data updates the user" do
       user = user_fixture()
       assert {:ok, %User{} = user} = Accounts.update_user(user, @update_attrs)
-      assert user.email == "some updated email"
+      assert user.email == "some@updated.email"
       assert user.name == "some updated name"
     end
 
