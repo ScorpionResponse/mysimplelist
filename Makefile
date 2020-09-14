@@ -44,3 +44,10 @@ test:
 
 tail:
 	tail -f run/dev.log
+
+cover:
+	MIX_ENV=test mix test
+
+servecoverage:
+	@echo "http://localdev.scorpionresponse.website:8888"
+	cd cover && python -m http.server 8888
