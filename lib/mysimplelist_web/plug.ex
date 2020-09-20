@@ -11,7 +11,7 @@ defmodule MysimplelistWeb.Plug.SetCurrentUser do
       nil ->
         # TODO: Temporary 'authentication'
         # probably just do nothing and separately plug out redirecting unknown users
-        Logger.log("Using default user", :User_Defaulted, :warn)
+        Logger.log("Using default user", :User_Defaulted)
 
         assumed_user =
           case Accounts.get_user("f0269e68-b976-44c2-a8d5-ba5e6d93e6c1") do
